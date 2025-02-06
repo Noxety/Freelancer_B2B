@@ -162,6 +162,52 @@ namespace Freelancer_client.Classes
             }
         }
 
+        public List<Freelancer> GetAllFreelancer()
+        {
+            List<Freelancer> freelancers = new List<Freelancer>();
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                string query = "select * from freelancer";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader res = cmd.ExecuteReader();
+                while (res.Read())
+                {
+                    Freelancer freelancer = new Freelancer();
+                    freelancer.FreelancerId = res.GetInt32("id");
+                    freelancer.Skills = res.GetString("skills");
+                    freelancer.Expertise = res.GetString("expertise");
+                    freelancer.Porfolio = res.GetString("porfolio");
+                    freelancer.Id = res.GetInt32("userid");
+                    freelancers.Add(freelancer);
+                }
+                connection.Close();
+
+                string query1 = "select * from user where id=@id";
+                foreach (Freelancer f in freelancers)
+                {
+                    connection.Open();
+                    MySqlCommand cmd1 = new MySqlCommand(query1, connection);
+                    cmd1.Parameters.AddWithValue("@id", f.Id);
+                    MySqlDataReader res1 = cmd1.ExecuteReader();
+                    if (res1.Read())
+                    {
+                        f.Username = res1.GetString("username");
+                        f.Email = res1.GetString("email");
+                        f.Phone = res1.GetString("phone");
+                    }
+                    connection.Close();
+                }
+                return freelancers;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex);
+                return null;
+            }
+        }
+
         public Client FindClient(string username, string password)
         {
             connection = new MySqlConnection(connectionString);
@@ -405,6 +451,67 @@ namespace Freelancer_client.Classes
             }
         }
 
+        public List<Project> Project_Freelancer(int fid)
+        {
+            List<Project> projects = new List<Project>();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    // First query to get project IDs
+                    string query = "SELECT project_id FROM adi_assignment.freelancer_project WHERE freelancer_id = @fid";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@fid", fid);
+                        using (MySqlDataReader res = cmd.ExecuteReader())
+                        {
+                            List<int> projectIds = new List<int>();
+                            while (res.Read())
+                            {
+                                projectIds.Add(res.GetInt32("project_id"));
+                            }
+                            res.Close();
+                            foreach (int pid in projectIds)
+                            {
+                                string query1 = "SELECT * FROM project WHERE id = @pid";
+                                using (MySqlCommand cmd1 = new MySqlCommand(query1, connection))
+                                {
+                                    cmd1.Parameters.AddWithValue("@pid", pid);
+                                    using (MySqlDataReader res1 = cmd1.ExecuteReader())
+                                    {
+                                        if (res1.Read())
+                                        {
+                                            Project project = new Project
+                                            {
+                                                ProjectId = res1.GetInt32("id"),
+                                                ProjectName = res1.GetString("projectName"),
+                                                ProjectDescription = res1.GetString("projectDescription"),
+                                                ProjectSkills = res1.GetString("projectSkills"),
+                                                ProjectBudget = res1.GetDouble("projectBudget"),
+                                                ProjectDuration = res1.GetString("projectDuration"),
+                                                ProjectStatus = res1.GetString("projectStatus"),
+                                                ProjectDeadline = res1.GetString("projectDeadline"),
+                                                ProjectCompletedDate = res1.GetDateTime("projectCompletedDate"),
+                                                ProjectCreatedDate = res1.GetDateTime("projectCreatedDate")
+                                            };
+                                            projects.Add(project);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return projects;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return null;
+                }
+            }
+        }
+
         public List<Project> ProjectsByExpertise(string expertise)
         {
             List<Project> projects = new List<Project>();
@@ -622,6 +729,31 @@ namespace Freelancer_client.Classes
             }
         }
 
+        public bool CompleteProject(int pid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "UPDATE project SET projectStatus = 'Completed', projectCompletedDate = @date WHERE id = @pid";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@pid", pid);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
         public Freelancer GetFreelancerWithBidProject(int pid)
         {
             Freelancer freelancer = new Freelancer();
@@ -649,13 +781,26 @@ namespace Freelancer_client.Classes
                                         if (res1.Read())
                                         {
                                             freelancer.FreelancerId = res1.GetInt32("id");
-                                            freelancer.Username = res1.GetString("username");
-                                            freelancer.Email = res1.GetString("email");
-                                            freelancer.Phone = res1.GetString("phone");
                                             freelancer.Skills = res1.GetString("skills");
                                             freelancer.Expertise = res1.GetString("expertise");
                                             freelancer.Porfolio = res1.GetString("porfolio");
+                                            freelancer.Id = res1.GetInt32("userid");
                                         }
+                                    }
+                                }
+                            }
+
+                            string query2 = "SELECT * FROM user WHERE id = @id";
+                            using (MySqlCommand cmd2 = new MySqlCommand(query2, connection))
+                            {
+                                cmd2.Parameters.AddWithValue("@id", freelancer.Id);
+                                using (MySqlDataReader res2 = cmd2.ExecuteReader())
+                                {
+                                    if (res2.Read())
+                                    {
+                                        freelancer.Username = res2.GetString("username");
+                                        freelancer.Email = res2.GetString("email");
+                                        freelancer.Phone = res2.GetString("phone");
                                     }
                                 }
                             }
@@ -735,6 +880,63 @@ namespace Freelancer_client.Classes
                 }
             }
 
+        }
+
+        public bool RateProject(int pid,int cid, int fid, float rating)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "insert into rating (rating, project_id, client_id, freelancer_id) values (@rating, @project_id, @client_id, @freelancer_id)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@rating", rating);
+                        cmd.Parameters.AddWithValue("@project_id", pid);
+                        cmd.Parameters.AddWithValue("@client_id", cid);
+                        cmd.Parameters.AddWithValue("@freelancer_id", fid);
+                        cmd.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error in dao: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        public Rating GetRatingListByProjectId(int pid)
+        {
+            connection = new MySqlConnection(connectionString);
+            Rating rating = new Rating();
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM rating WHERE project_id = @pid";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@pid", pid);
+                MySqlDataReader res = cmd.ExecuteReader();
+                while (res.Read())
+                {
+                    rating.RatingId = res.GetInt32("id");
+                    rating.RatingValue = res.GetFloat("rating");
+                    rating.ProjectId = res.GetInt32("project_id");
+                    rating.ClientId = res.GetInt32("client_id");
+                    rating.FreelancerId = res.GetInt32("freelancer_id");
+                    
+                }
+                connection.Close();
+                return rating;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error" + ex);
+                return null;
+            }
         }
     }
 }

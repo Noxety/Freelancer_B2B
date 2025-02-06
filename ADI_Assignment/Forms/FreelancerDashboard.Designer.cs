@@ -92,6 +92,7 @@
             this.guna2Button4.Size = new System.Drawing.Size(277, 34);
             this.guna2Button4.TabIndex = 11;
             this.guna2Button4.Text = "View Owned Projects";
+            this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
             // 
             // guna2Button3
             // 
@@ -109,7 +110,8 @@
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(277, 34);
             this.guna2Button3.TabIndex = 10;
-            this.guna2Button3.Text = "View Completed Projects";
+            this.guna2Button3.Text = "View Completed Projects Rating";
+            this.guna2Button3.Click += new System.EventHandler(this.guna2Button3_Click);
             // 
             // guna2Button2
             // 

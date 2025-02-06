@@ -27,11 +27,19 @@ namespace Freelancer_client.Forms.Components
             List<Project> projects = DAO.Project_client(client.ClientId);
             foreach (Project p in projects)
             {
+                Rating rating = new Rating();
+                rating = DAO.GetRatingListByProjectId(p.ProjectId);
+
+                if(rating == null)
+                {
+                    rating = new Rating();
+                    rating.RatingValue = 0;
+                }
                 GroupBox gb = new GroupBox
                 {
                     Text = p.ProjectName,
                 Width = 200,
-                Height = 200,
+                Height = 160,
                 Padding = new Padding(10),
                 Margin = new Padding(10),
                 };
@@ -71,21 +79,23 @@ namespace Freelancer_client.Forms.Components
                     AutoSize = true,
                     Location = new Point(10, 120)
                 };
-                
-                Button btn = new Button
+                if(p.ProjectStatus == "Completed")
                 {
-                    Text = "View Bids",
-                    Location = new Point(10, 140),
-                    Tag = p
-                };
-
+                    Label lbl6 = new Label
+                    {
+                        Text = "Rating: " + rating.RatingValue,
+                        AutoSize = true,
+                        Location = new Point(10, 140)
+                    };
+                    gb.Controls.Add(lbl6);
+                }
                 gb.Controls.Add(lbl);
                 gb.Controls.Add(lbl1);
                 gb.Controls.Add(lbl2);
                 gb.Controls.Add(lbl3);
                 gb.Controls.Add(lbl4);
                 gb.Controls.Add(lbl5);
-                gb.Controls.Add(btn);
+            
                 flowLayoutPanel1.Controls.Add(gb);
             }
 

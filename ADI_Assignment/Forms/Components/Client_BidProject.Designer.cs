@@ -28,21 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flow_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // flow_panel
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 453);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flow_panel.AutoScroll = true;
+            this.flow_panel.BackColor = System.Drawing.Color.White;
+            this.flow_panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flow_panel.Location = new System.Drawing.Point(0, 0);
+            this.flow_panel.Name = "flow_panel";
+            this.flow_panel.Size = new System.Drawing.Size(690, 456);
+            this.flow_panel.TabIndex = 0;
             // 
             // Client_BidProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flow_panel);
             this.Name = "Client_BidProject";
             this.Size = new System.Drawing.Size(690, 456);
             this.Load += new System.EventHandler(this.Client_BidViewLoad);
@@ -52,6 +55,6 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flow_panel;
     }
 }

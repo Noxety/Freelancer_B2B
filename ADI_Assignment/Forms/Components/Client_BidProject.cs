@@ -25,10 +25,11 @@ namespace Freelancer_client.Forms.Components
 
         private void Client_BidViewLoad(object sender, EventArgs e)
         {
+            flow_panel.Controls.Clear();
             int cid = client.ClientId;
 
 
-            List<Project> projects = DAO.ProjectsByStatus("Pending", cid);
+            List<Project> projects = DAO.ProjectsByStatus("Waiting", cid);
             Freelancer freelancer = new Freelancer();
 
             foreach (Project p in projects)
@@ -38,7 +39,7 @@ namespace Freelancer_client.Forms.Components
                 {
                     Text = p.ProjectName,
                     Width = 200,
-                    Height = 200,
+                    Height = 290,
                     Padding = new Padding(10),
                     Margin = new Padding(10),
                 };
@@ -135,9 +136,19 @@ namespace Freelancer_client.Forms.Components
                 gb.Controls.Add(lbl10);
                 gb.Controls.Add(lbl11);
                 gb.Controls.Add(btn);
-                flowLayoutPanel1.Controls.Add(gb);
+                flow_panel.Controls.Add(gb);
             }
 
+            if (projects.Count == 0)
+            {
+                Label lbl = new Label
+                {
+                    Text = "No Projects Available",
+                    AutoSize = true,
+                    Location = new Point(10, 20)
+                };
+                flow_panel.Controls.Add(lbl);
+            }
         }
 
         private void ButtonClicked(object sender, EventArgs e)

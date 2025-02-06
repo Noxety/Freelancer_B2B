@@ -1,4 +1,5 @@
 ﻿using Freelancer_client.Classes;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,48 +7,35 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Freelancer_client.Forms.Components
 {
-    public partial class Freelancer_viewprojects : UserControl
+    public partial class Freelancer_ViewRate : UserControl
     {
-        DAO DAO = new DAO();
         Freelancer freelancer = new Freelancer();
-        Client client = new Client();
-        public Freelancer_viewprojects(Freelancer free)
+        DAO dao = new DAO();
+        Classes.Client client = new Classes.Client();
+        Rating rating = new Rating();
+
+        public Freelancer_ViewRate(Freelancer f)
         {
+            freelancer = f;
             InitializeComponent();
-            freelancer = free;
-            Freelancer_viewprojects_Load(this, null);
+            LoadForm(this, null);
         }
 
-        private void Freelancer_viewprojects_Load(object sender, EventArgs e)
+        private void LoadForm(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.Clear();
-            List<Project> projects = DAO.ProjectsByExpertise(freelancer.Expertise);
-            int count = 0;
-            foreach (Project p in projects)
-            {
-                if (p.ProjectStatus == "Completed")
+           List<Project> projects = new List<Project>();
+            projects = dao.Project_Freelancer(freelancer.FreelancerId);
+            foreach (Project project in projects)
+                foreach (Project p in projects)
                 {
-                    count++;
-                    continue;
-                }
-                else if (p == null)
-                {
-                    Label lbl = new Label
-                    {
-                        Text = "No Projects",
-                        AutoSize = true,
-                        Location = new Point(10, 10)
-                    };
-                }
-                else
-                {
-                    client = DAO.GetClientByProjectId(p.ProjectId);
+                    client = dao.GetClientByProjectId(p.ProjectId);
+                    rating = dao.GetRatingListByProjectId(p.ProjectId);
+                 
                     GroupBox gb = new GroupBox
                     {
                         Text = p.ProjectName,
@@ -98,14 +86,12 @@ namespace Freelancer_client.Forms.Components
                         AutoSize = true,
                         Location = new Point(10, 140)
                     };
-                    Button btn = new Button
+                    Label lbl7 = new Label
                     {
-                        Text = "Apply",
-                        Location = new Point(10, 160),
-                        Tag = p.ProjectId
+                        Text = "Rating: " + rating.RatingValue + " / 5",
+                        AutoSize = true,
+                        Location = new Point(10, 160)
                     };
-                    btn.Click += new EventHandler(ButtonClicked);
-
                     gb.Controls.Add(lbl);
                     gb.Controls.Add(lbl1);
                     gb.Controls.Add(lbl2);
@@ -113,29 +99,10 @@ namespace Freelancer_client.Forms.Components
                     gb.Controls.Add(lbl4);
                     gb.Controls.Add(lbl5);
                     gb.Controls.Add(lbl6);
-                    gb.Controls.Add(btn);
-                    flowLayoutPanel1.Controls.Add(gb);
+                    gb.Controls.Add(lbl7);
+                    flow_panel1.Controls.Add(gb);
                 }
-               
-              
-            }
 
-
-        }
-
-        private void ButtonClicked(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            int projectId = (int)btn.Tag;
-            MessageBox.Show(projectId.ToString());
-            if (DAO.ApplyProject(projectId,freelancer.FreelancerId)==true)
-            {
-                MessageBox.Show("Applied Successfully");
-            }
-            else
-            {
-                MessageBox.Show("Already Applied");
-            }
         }
     }
 }

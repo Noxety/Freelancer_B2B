@@ -52,5 +52,29 @@ namespace Freelancer_client.Forms
             login.ShowDialog();
             this.Close();
         }
+
+        private void guna2Button4_Click(object sender, EventArgs e)
+        {
+            freelancer_panel.Controls.Clear();
+            var freelancerpanel1 = new Freelancer_ownedProject(freelancer)
+            {
+                Dock = DockStyle.Fill
+            };
+            freelancer_panel.Controls.Add(freelancerpanel1);
+            freelancer_panel.Visible = true;
+            freelancerpanel1.BringToFront();
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            freelancer_panel.Controls.Clear();
+            var freelancerpanel2 = new Freelancer_ViewRate(freelancer)
+            {
+                Dock = DockStyle.Fill
+            };
+            freelancer_panel.Controls.Add(freelancerpanel2);
+            freelancer_panel.Visible = true;
+            freelancerpanel2.BringToFront();
+        }
     }
 }

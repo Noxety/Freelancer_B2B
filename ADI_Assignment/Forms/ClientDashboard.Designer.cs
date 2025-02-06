@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.btn_logout = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
@@ -37,7 +38,6 @@
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.client_panel = new System.Windows.Forms.Panel();
-            this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2GroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,25 @@
             this.guna2GroupBox1.Size = new System.Drawing.Size(314, 456);
             this.guna2GroupBox1.TabIndex = 0;
             // 
+            // guna2Button6
+            // 
+            this.guna2Button6.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button6.BorderThickness = 1;
+            this.guna2Button6.CustomBorderThickness = new System.Windows.Forms.Padding(1);
+            this.guna2Button6.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button6.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button6.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button6.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button6.FillColor = System.Drawing.Color.White;
+            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button6.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button6.Location = new System.Drawing.Point(14, 273);
+            this.guna2Button6.Name = "guna2Button6";
+            this.guna2Button6.Size = new System.Drawing.Size(277, 34);
+            this.guna2Button6.TabIndex = 14;
+            this.guna2Button6.Text = "Bid Projects";
+            this.guna2Button6.Click += new System.EventHandler(this.guna2Button6_Click);
+            // 
             // guna2Button5
             // 
             this.guna2Button5.BackColor = System.Drawing.Color.Transparent;
@@ -76,6 +95,7 @@
             this.guna2Button5.Size = new System.Drawing.Size(277, 34);
             this.guna2Button5.TabIndex = 13;
             this.guna2Button5.Text = "Rate Completed Projects";
+            this.guna2Button5.Click += new System.EventHandler(this.guna2Button5_Click);
             // 
             // btn_logout
             // 
@@ -113,6 +133,7 @@
             this.guna2Button4.Size = new System.Drawing.Size(277, 34);
             this.guna2Button4.TabIndex = 11;
             this.guna2Button4.Text = "View Freelancers";
+            this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
             // 
             // guna2Button3
             // 
@@ -185,29 +206,11 @@
             // 
             // client_panel
             // 
-            this.client_panel.Location = new System.Drawing.Point(318, -2);
+            this.client_panel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.client_panel.Location = new System.Drawing.Point(315, 0);
             this.client_panel.Name = "client_panel";
-            this.client_panel.Size = new System.Drawing.Size(690, 456);
+            this.client_panel.Size = new System.Drawing.Size(690, 452);
             this.client_panel.TabIndex = 1;
-            // 
-            // guna2Button6
-            // 
-            this.guna2Button6.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button6.BorderThickness = 1;
-            this.guna2Button6.CustomBorderThickness = new System.Windows.Forms.Padding(1);
-            this.guna2Button6.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button6.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button6.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button6.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button6.FillColor = System.Drawing.Color.White;
-            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button6.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button6.Location = new System.Drawing.Point(14, 273);
-            this.guna2Button6.Name = "guna2Button6";
-            this.guna2Button6.Size = new System.Drawing.Size(277, 34);
-            this.guna2Button6.TabIndex = 14;
-            this.guna2Button6.Text = "Bid Projects";
-            this.guna2Button6.Click += new System.EventHandler(this.guna2Button6_Click);
             // 
             // ClientDashboard
             // 

@@ -75,14 +75,39 @@ namespace Freelancer_client.Forms
 
         private void guna2Button6_Click(object sender, EventArgs e)
         {
-        
+            client_panel.Controls.Clear();
             var clientpanel3 = new Client_BidProject(client)
             {
                 Dock = DockStyle.Fill
             };
             client_panel.Controls.Add(clientpanel3);
             client_panel.Visible = true;
+            
             clientpanel3.BringToFront();
+        }
+
+        private void guna2Button4_Click(object sender, EventArgs e)
+        {
+            client_panel.Controls.Clear();
+            var clientpanel4 = new Client_viewFreelancers(client)
+            {
+                Dock = DockStyle.Fill
+            };
+            client_panel.Controls.Add(clientpanel4);
+            client_panel.Visible = true;
+            clientpanel4.BringToFront();
+        }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+            client_panel.Controls.Clear();
+            var clientpanel5 = new Client_RateProject(client)
+            {
+                Dock = DockStyle.Fill
+            };
+            client_panel.Controls.Add(clientpanel5);
+            client_panel.Visible = true;
+            clientpanel5.BringToFront();
         }
     }
 }

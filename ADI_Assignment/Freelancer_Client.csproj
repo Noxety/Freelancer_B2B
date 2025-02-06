@@ -107,6 +107,7 @@
     <Compile Include="Classes\DAO.cs" />
     <Compile Include="Classes\Freelancer.cs" />
     <Compile Include="Classes\Project.cs" />
+    <Compile Include="Classes\Rating.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Forms\ClientDashboard.cs">
       <SubType>Form</SubType>
@@ -138,11 +139,29 @@
     <Compile Include="Forms\Components\Client_profile.Designer.cs">
       <DependentUpon>Client_profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Components\Client_RateProject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Client_RateProject.Designer.cs">
+      <DependentUpon>Client_RateProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Components\Client_viewFreelancers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Client_viewFreelancers.Designer.cs">
+      <DependentUpon>Client_viewFreelancers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Components\Client_viewprojects.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Components\Client_viewprojects.Designer.cs">
       <DependentUpon>Client_viewprojects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Components\Freelancer_ownedProject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Freelancer_ownedProject.Designer.cs">
+      <DependentUpon>Freelancer_ownedProject.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Components\Freelancer_profile.cs">
       <SubType>UserControl</SubType>
@@ -155,6 +174,12 @@
     </Compile>
     <Compile Include="Forms\Components\Freelancer_viewprojects.Designer.cs">
       <DependentUpon>Freelancer_viewprojects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Components\Freelancer_ViewRate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Freelancer_ViewRate.Designer.cs">
+      <DependentUpon>Freelancer_ViewRate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FreelancerDashboard.cs">
       <SubType>Form</SubType>
@@ -197,14 +222,26 @@
     <EmbeddedResource Include="Forms\Components\Client_profile.resx">
       <DependentUpon>Client_profile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Components\Client_RateProject.resx">
+      <DependentUpon>Client_RateProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Components\Client_viewFreelancers.resx">
+      <DependentUpon>Client_viewFreelancers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Components\Client_viewprojects.resx">
       <DependentUpon>Client_viewprojects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Components\Freelancer_ownedProject.resx">
+      <DependentUpon>Freelancer_ownedProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Components\Freelancer_profile.resx">
       <DependentUpon>Freelancer_profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Components\Freelancer_viewprojects.resx">
       <DependentUpon>Freelancer_viewprojects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Components\Freelancer_ViewRate.resx">
+      <DependentUpon>Freelancer_ViewRate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FreelancerDashboard.resx">
       <DependentUpon>FreelancerDashboard.cs</DependentUpon>
