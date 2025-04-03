@@ -12,7 +12,7 @@ namespace Freelancer_client.Classes
 {
     public class DAO
     {
-        public static string connectionString = "server=localhost;database=adi_assignment;UID=root;password=root"; // Database Connetion
+        public static string connectionString = "server=localhost;database=adi_assignment;UID=root;";
         MySqlConnection connection = new MySqlConnection(connectionString);
         public bool InsertFreelancer(Freelancer freelancer)
         {

@@ -23,7 +23,7 @@ namespace Freelancer_client
             Label button = sender as Label;
             if (button != null)
             {
-                button.ForeColor = Color.LightBlue; // Change background color on hover
+                button.ForeColor = Color.LightBlue; 
             }
         }
 
@@ -32,7 +32,7 @@ namespace Freelancer_client
             Label button = sender as Label;
             if (button != null)
             {
-                button.ForeColor = Color.Black; // Reset background color
+                button.ForeColor = Color.Black; 
             }
         }
         private void btn_freelance_Click(object sender, EventArgs e)

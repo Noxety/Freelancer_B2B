@@ -43,32 +43,40 @@ namespace Freelancer_client.Forms
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            Client client = new Client();
-            client.Username = txt_c_username.Text;
-            client.Password = txt_c_password.Text;
-            client.Email = txt_c_email.Text;
-            client.Phone = txt_c_phone.Text;
-            client.CompanyName = txt_companyName.Text;
-            client.CompanyAddress = txt_companyAddress.Text;
-            client.CompanyPhone = txt_companyPhone.Text;
-            client.CompanyEmail = txt_companyEmail.Text;
-            client.CompanyWebsite = txt_companyWebsite.Text;
-            client.CompanyDescription = txt_companyDesc.Text;
-
-            client.PostedProjectId = 0;
-
-            if (DAO.InsertClient(client) == true)
+            if (txt_conpass.Text == txt_c_password.Text)
             {
-                MessageBox.Show("Client Registered Successfully");
-                this.Hide();
-                Login log = new Login();
-                log.ShowDialog();
-                this.Close();
+                Client client = new Client();
+                client.Username = txt_c_username.Text;
+                client.Password = txt_c_password.Text;
+                client.Email = txt_c_email.Text;
+                client.Phone = txt_c_phone.Text;
+                client.CompanyName = txt_companyName.Text;
+                client.CompanyAddress = txt_companyAddress.Text;
+                client.CompanyPhone = txt_companyPhone.Text;
+                client.CompanyEmail = txt_companyEmail.Text;
+                client.CompanyWebsite = txt_companyWebsite.Text;
+                client.CompanyDescription = txt_companyDesc.Text;
+
+                client.PostedProjectId = 0;
+
+                if (DAO.InsertClient(client) == true)
+                {
+                    MessageBox.Show("Client Registered Successfully");
+                    this.Hide();
+                    Login log = new Login();
+                    log.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error in Registering Client");
+                }
             }
             else
             {
-                MessageBox.Show("Error in Registering Client");
+                MessageBox.Show("Confirm Password and Password doesn't match");
             }
+           
 
            
 
@@ -76,29 +84,39 @@ namespace Freelancer_client.Forms
 
         private void btn_freelance_con_Click(object sender, EventArgs e)
         {
-            Freelancer freelancer = new Freelancer();
-            freelancer.Username = txt_username.Text;
-            freelancer.Password = txt_password.Text;
-            freelancer.Email = txt_email.Text;
-            freelancer.Phone = txt_phone.Text;
-            freelancer.Skills = txt_skill.Text;
-            freelancer.Expertise = txt_expertise.Text;
-            freelancer.Porfolio = txt_porfolio.Text;
-
-            freelancer.AppliedProjectId = 0;
-
-            if(DAO.InsertFreelancer(freelancer)==true)
+            if (txt_password.Text == txt_conpass_free.Text)
             {
-                MessageBox.Show("Freelancer Registered Successfully");
-                this.Hide();
-                Login log = new Login();
-                log.ShowDialog();
-                this.Close();
+                Freelancer freelancer = new Freelancer();
+                freelancer.Username = txt_username.Text;
+                freelancer.Password = txt_password.Text;
+                freelancer.Email = txt_email.Text;
+                freelancer.Phone = txt_phone.Text;
+                freelancer.Skills = txt_skill.Text;
+                freelancer.Expertise = txt_expertise.Text;
+                freelancer.Porfolio = txt_porfolio.Text;
+
+                freelancer.AppliedProjectId = 0;
+
+                if (DAO.InsertFreelancer(freelancer) == true)
+                {
+                    MessageBox.Show("Freelancer Registered Successfully");
+                    this.Hide();
+                    Login log = new Login();
+                    log.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error in Registering Freelancer");
+                }
             }
             else
             {
-                MessageBox.Show("Error in Registering Freelancer");
+                MessageBox.Show("Confirm Password and Password doesn't match");
+
             }
+
+
         }
     }
 }
