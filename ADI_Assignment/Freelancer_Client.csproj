@@ -104,8 +104,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\Client_Project.cs" />
     <Compile Include="Classes\DAO.cs" />
     <Compile Include="Classes\Freelancer.cs" />
+    <Compile Include="Classes\Freelancer_Project.cs" />
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\Rating.cs" />
     <Compile Include="Classes\User.cs" />
