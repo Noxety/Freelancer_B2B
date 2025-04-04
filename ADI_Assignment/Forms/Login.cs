@@ -60,6 +60,7 @@ namespace Freelancer_client
            
             if (client != null)
             {
+                MessageBox.Show("Client Account Login");
                 this.Hide();
                 ClientDashboard dashboard = new ClientDashboard(client);
                 dashboard.ShowDialog();
@@ -87,6 +88,8 @@ namespace Freelancer_client
             freelancer = dao.FindFreelancer(txt_free_username.Text, txt_free_password.Text);
             if (freelancer != null)
             {
+                MessageBox.Show("Freelancer Account Login");
+
                 this.Hide();
                 FreelancerDashboard dashboard = new FreelancerDashboard(freelancer);
                 dashboard.ShowDialog();

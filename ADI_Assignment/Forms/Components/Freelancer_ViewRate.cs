@@ -30,12 +30,17 @@ namespace Freelancer_client.Forms.Components
         {
            List<Project> projects = new List<Project>();
             projects = dao.Project_Freelancer(freelancer.FreelancerId);
-            foreach (Project project in projects)
-                foreach (Project p in projects)
+            
+            int count = 0;
+            foreach (Project p in projects)
                 {
+
+                if(p.ProjectStatus == "Completed")
+                {
+                    count++;
                     client = dao.GetClientByProjectId(p.ProjectId);
                     rating = dao.GetRatingListByProjectId(p.ProjectId);
-                 
+
                     GroupBox gb = new GroupBox
                     {
                         Text = p.ProjectName,
@@ -102,6 +107,18 @@ namespace Freelancer_client.Forms.Components
                     gb.Controls.Add(lbl7);
                     flow_panel1.Controls.Add(gb);
                 }
+                    
+                }
+            if (count == 0)
+            {
+                Label lbl = new Label
+                {
+                    Text = "No Projects Completed Yet",
+                    AutoSize = true,
+                    Location = new Point(10, 20)
+                };
+                flow_panel1.Controls.Add(lbl);
+            }
 
         }
     }

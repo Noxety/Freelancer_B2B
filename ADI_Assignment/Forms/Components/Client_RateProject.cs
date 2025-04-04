@@ -43,6 +43,8 @@ namespace Freelancer_client.Forms.Components
             {
                 Freelancer freelancer = DAO.GetFreelancerWithBidProject(p.ProjectId);
                 free.FreelancerId=freelancer.FreelancerId;
+
+                Rating rate = DAO.GetRatingListByProjectId(p.ProjectId);
                 GroupBox gb = new GroupBox
                 {
                     Text = p.ProjectName,
@@ -87,31 +89,53 @@ namespace Freelancer_client.Forms.Components
                     AutoSize = true,
                     Location = new Point(10, 120)
                 };
-                Guna2RatingStar rating = new Guna2RatingStar
+    
+                if(rate.RatingValue != 0)
                 {
-                    Name = "ratingStar",
-                    Location = new Point(10, 140),
-                    Size = new Size(180, 30),
-                    Value = 0,
-                };
-                Button btn = new Button
-                {
-                    Text = "Rate",
-                    Location = new Point(10, 180),
-                    Tag = p.ProjectId,
-                };
-                
-                btn.Click += new EventHandler(RateProject);
-                gb.Controls.Add(lbl);
-                gb.Controls.Add(lbl1);
-                gb.Controls.Add(lbl2);
-                gb.Controls.Add(lbl3);
-                gb.Controls.Add(lbl4);
-                gb.Controls.Add(lbl5);
-                gb.Controls.Add(rating);
-                gb.Controls.Add(btn);
-                flow_panel1.Controls.Add(gb);
+                    Label lbl6 = new Label
+                    {
+                        Text = "Rating: " + rate.RatingValue,
+                        AutoSize = true,
+                        Location = new Point(10, 140)
+                    };
 
+                    gb.Controls.Add(lbl);
+                    gb.Controls.Add(lbl1);
+                    gb.Controls.Add(lbl2);
+                    gb.Controls.Add(lbl3);
+                    gb.Controls.Add(lbl4);
+                    gb.Controls.Add(lbl5);
+                    gb.Controls.Add(lbl6);
+                    flow_panel1.Controls.Add(gb);
+                }
+                else
+                {
+                    Guna2RatingStar rating = new Guna2RatingStar
+                    {
+                        Name = "ratingStar",
+                        Location = new Point(10, 140),
+                        Size = new Size(180, 30),
+                        Value = 0,
+                    };
+
+                    Button btn = new Button
+                    {
+                        Text = "Rate",
+                        Location = new Point(10, 180),
+                        Tag = p.ProjectId,
+                    };
+                    btn.Click += new EventHandler(RateProject);
+
+                    gb.Controls.Add(lbl);
+                    gb.Controls.Add(lbl1);
+                    gb.Controls.Add(lbl2);
+                    gb.Controls.Add(lbl3);
+                    gb.Controls.Add(lbl4);
+                    gb.Controls.Add(lbl5);
+                    gb.Controls.Add(rating);
+                    gb.Controls.Add(btn);
+                    flow_panel1.Controls.Add(gb);
+                }
             }
         }
 
@@ -124,8 +148,16 @@ namespace Freelancer_client.Forms.Components
             if (rating != null)
             {
                 float rate = rating.Value;
-                DAO.RateProject(pid, client.ClientId, free.FreelancerId, rate);
-                LoadForm(this, null);
+                if(DAO.RateProject(pid, client.ClientId, free.FreelancerId, rate) == true)
+                {
+                    MessageBox.Show("Gave Rating Successful");
+                    LoadForm(this, null);
+                }
+                else
+                {
+                    MessageBox.Show("Rating got error is there database connection?");
+                }
+
             }
             else
             {

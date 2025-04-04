@@ -158,6 +158,7 @@ namespace Freelancer_client.Forms.Components
             if (DAO.AcceptedProject(pid, client.ClientId) == true)
             {
                 MessageBox.Show("Bid Accepted");
+                Client_BidViewLoad(this, null);
             }
             else
             {

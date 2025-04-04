@@ -25,6 +25,17 @@ namespace Freelancer_client.Forms.Components
         {
             flowLayoutPanel1.Controls.Clear();
             List<Project> projects = DAO.Project_client(client.ClientId);
+
+            if (projects.Count == 0)
+            {
+                Label lbl = new Label
+                {
+                    Text = "No Projects",
+                    AutoSize = true,
+                    Location = new Point(10, 20)
+                };
+                flowLayoutPanel1.Controls.Add(lbl);
+            }
             foreach (Project p in projects)
             {
                 Rating rating = new Rating();
@@ -37,7 +48,7 @@ namespace Freelancer_client.Forms.Components
                 }
                 GroupBox gb = new GroupBox
                 {
-                    Text = p.ProjectName,
+                Text = p.ProjectName,
                 Width = 200,
                 Height = 160,
                 Padding = new Padding(10),

@@ -39,70 +39,88 @@ namespace Freelancer_client.Forms.Components
                 flow_panel11.Controls.Add(lbl);
             }
 
+            int count = 0;
             foreach (Project p in projects)
             {
-               
-                Client client = DAO.GetClientByProjectId(p.ProjectId);
-                GroupBox gb = new GroupBox
+                if (p.ProjectStatus == "Accepted" || p.ProjectStatus == "Completed")
                 {
-                    Text = p.ProjectName,
-                    Width = 200,
-                    Height = 290,
-                    Padding = new Padding(10),
-                    Margin = new Padding(10),
-                };
+                    count++;
+                    Client client = DAO.GetClientByProjectId(p.ProjectId);
+                    GroupBox gb = new GroupBox
+                    {
+                        Text = p.ProjectName,
+                        Width = 200,
+                        Height = 200,
+                        Padding = new Padding(10),
+                        Margin = new Padding(10),
+                    };
+
+                    Label lbl = new Label
+                    {
+                        Text = "Description: " + p.ProjectDescription,
+                        AutoSize = true,
+                        Location = new Point(10, 20)
+                    };
+                    Label lbl1 = new Label
+                    {
+                        Text = "Budget: " + p.ProjectBudget,
+                        AutoSize = true,
+                        Location = new Point(10, 40)
+                    };
+                    Label lbl2 = new Label
+                    {
+                        Text = "Skills: " + p.ProjectSkills,
+                        AutoSize = true,
+                        Location = new Point(10, 60)
+                    };
+                    Label lbl3 = new Label
+                    {
+                        Text = "Status: " + p.ProjectStatus,
+                        AutoSize = true,
+                        Location = new Point(10, 80)
+                    };
+                    Label lbl4 = new Label
+                    {
+                        Text = "Client: " + client.CompanyName,
+                        AutoSize = true,
+                        Location = new Point(10, 100)
+                    };
+
+
+                    Button btn = new Button
+                    {
+                        Text = "Complete Project",
+                        Location = new Point(10, 120),
+                        Tag = p.ProjectId
+                    };
+                    if (p.ProjectStatus == "Completed")
+                    {
+                        btn.Visible = false;
+                    }
+                    ;
+
+                    btn.Click += new EventHandler(ButtonClickEvent);
+                    gb.Controls.Add(lbl);
+                    gb.Controls.Add(lbl1);
+                    gb.Controls.Add(lbl2);
+                    gb.Controls.Add(lbl3);
+                    gb.Controls.Add(lbl4);
+                    gb.Controls.Add(btn);
+                    flow_panel11.Controls.Add(gb);
+                }
                
+               
+            }
+
+            if (count == 0)
+            {
                 Label lbl = new Label
                 {
-                    Text = "Description: " + p.ProjectDescription,
+                    Text = "No Projects Owned",
                     AutoSize = true,
                     Location = new Point(10, 20)
                 };
-                Label lbl1 = new Label
-                {
-                    Text = "Budget: " + p.ProjectBudget,
-                    AutoSize = true,
-                    Location = new Point(10, 40)
-                };
-                Label lbl2 = new Label
-                {
-                    Text = "Skills: " + p.ProjectSkills,
-                    AutoSize = true,
-                    Location = new Point(10, 60)
-                };
-                Label lbl3 = new Label
-                {
-                    Text = "Status: " + p.ProjectStatus,
-                    AutoSize = true,
-                    Location = new Point(10, 80)
-                };
-                Label lbl4 = new Label
-                {
-                    Text = "Client: " +client.CompanyName,
-                    AutoSize = true,
-                    Location = new Point(10, 100)
-                };
-                
-
-                Button btn = new Button
-                {
-                    Text = "Complete Project",
-                    Location = new Point(10, 120),
-                    Tag = p.ProjectId
-                };
-                if (p.ProjectStatus == "Completed")
-                {
-                    btn.Visible = false;
-                };
-
-                btn.Click += new EventHandler(ButtonClickEvent);
-                gb.Controls.Add(lbl);
-                gb.Controls.Add(lbl1);
-                gb.Controls.Add(lbl2);
-                gb.Controls.Add(lbl3);
-                gb.Controls.Add(lbl4);
-                gb.Controls.Add(btn);
-                flow_panel11.Controls.Add(gb);
+                flow_panel11.Controls.Add(lbl);
             }
         }
 
@@ -110,8 +128,17 @@ namespace Freelancer_client.Forms.Components
         {
             Button btn = (Button)sender;
             int pid = (int)btn.Tag;
-            DAO.CompleteProject(pid);
-            Freelancer_ownedProject_Load(this, null);
+            if (DAO.CompleteProject(pid) == true)
+            {
+                MessageBox.Show("Project Completed");
+                Freelancer_ownedProject_Load(this, null);
+            }
+            else
+            {
+                MessageBox.Show("There is error at database .");
+            }
+            
+         
         }
     }
 }

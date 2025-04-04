@@ -713,7 +713,6 @@ namespace Freelancer_client.Classes
                         {
                             if (res.Read())
                             {
-                                MessageBox.Show("Project Accepted");
                                 return true;
                             }
                         }

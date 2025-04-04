@@ -76,5 +76,17 @@ namespace Freelancer_client.Forms
             freelancer_panel.Visible = true;
             freelancerpanel2.BringToFront();
         }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+            freelancer_panel.Controls.Clear();
+            var freelancerpanel3 = new Freelancer_ViewBid(freelancer)
+            {
+                Dock = DockStyle.Fill
+            };
+            freelancer_panel.Controls.Add(freelancerpanel3);
+            freelancer_panel.Visible = true;
+            freelancerpanel3.BringToFront();
+        }
     }
 }

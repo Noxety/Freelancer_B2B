@@ -33,7 +33,7 @@ namespace Freelancer_client.Forms.Components
                 {
                     Text = "No Freelancers",
                     AutoSize = true,
-                    Location = new Point(10, 10)
+                    Location = new Point(10, 20)
                 };
                 flow_panel1.Controls.Add(lbl);
             }

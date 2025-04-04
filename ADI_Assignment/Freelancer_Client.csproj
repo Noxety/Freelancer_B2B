@@ -169,6 +169,12 @@
     <Compile Include="Forms\Components\Freelancer_profile.Designer.cs">
       <DependentUpon>Freelancer_profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Components\Freelancer_ViewBid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Components\Freelancer_ViewBid.Designer.cs">
+      <DependentUpon>Freelancer_ViewBid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Components\Freelancer_viewprojects.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Components\Freelancer_profile.resx">
       <DependentUpon>Freelancer_profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Components\Freelancer_ViewBid.resx">
+      <DependentUpon>Freelancer_ViewBid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Components\Freelancer_viewprojects.resx">
       <DependentUpon>Freelancer_viewprojects.cs</DependentUpon>
